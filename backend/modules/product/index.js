@@ -3,19 +3,19 @@ const productModel = require("./model");
 const handlers = {
   async findMany(req, res, next) {
     try {
-    //   let {
-    //     pageIndex,
-    //     pageSize,
-    //     sortBy, // 'tittle'
-    //     sort, // 'asc' | 'desc'
-    //     search = "",
-    //     fields = "",
-    //   } = req.query;
-    //   pageSize = parseInt(pageSize) || 20;
-    //   pageIndex = parseInt(pageIndex) || 1;
+      // let {
+      //   pageIndex,
+      //   pageSize,
+        // sortBy, // 'tittle'
+        // sort, // 'asc' | 'desc'
+        // search = "",
+        // fields = "",
+      // } = req.query;
+      // pageSize = parseInt(pageSize) || 20;
+      // pageIndex = parseInt(pageIndex) || 1;
 
-    //   let limit = pageSize;
-    //   let skip = (pageIndex - 1) * pageSize;
+      // let limit = pageSize;
+      // let skip = (pageIndex - 1) * pageSize;
     //   let sortInfor = `${sort == "desc" ? "-" : ""}${sortBy}`;
     //   //fields = 'title,description' => fieldsArr = ['title','description']
     //   let fieldsArr = fields.split(",").map((field) => field.trim());
@@ -31,6 +31,9 @@ const handlers = {
     //     .sort(sortInfor)
     //     .populate("categories", ["title"]);
       let items = await productModel.find({})
+        // .skip(skip)
+        // .limit(limit)
+      
       res.json(items);
     } catch (err) {
       next(err);
@@ -60,7 +63,7 @@ const handlers = {
   async update(req, res, next) {
     try {
       let data = req.body;
-      console.log(data)
+
       let id = req.body._id;
 
       if (!id) {
