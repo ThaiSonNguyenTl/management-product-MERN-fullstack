@@ -6,6 +6,8 @@ const productRouter = new express.Router();
 
 productRouter.get("/", productHandlers.findMany);
 
+productRouter.get("/search", productHandlers.searchProduct);
+
 productRouter.get("/:id", productHandlers.findOne);
 
 productRouter.post("/", productHandlers.create);

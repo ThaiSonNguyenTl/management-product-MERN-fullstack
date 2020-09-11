@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { actFetchProductRequest, actDeleteProductRequest} from '../../actions';
 import Pagination from '../../components/Pagination/Pagination';
+import Search from "../../components/Search/Search";
 class ProductListPage extends Component {
   constructor(props) {
     super(props)
@@ -51,20 +52,21 @@ class ProductListPage extends Component {
       }
     }
   render() {
-    let { products } = this.props
+    let { products,keyword,productSearch } = this.props
     let { pageSize, pageIndex } = this.state
     let indexLastPage = pageIndex * pageSize
     let indexFirstPage = indexLastPage - pageSize
     let currentProducts = products.slice(indexFirstPage, indexLastPage)
-    
+   
     // console.log('component render lan dau')
     return (
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <Link to='/product/add' className="btn btn-primary mt-4">
           Add Product
-        </Link>
+        </Link> 
+        <Search/>
         <div className="mt-4">
-          <ProductList>{this.showProducts(currentProducts)}</ProductList>
+          <ProductList>{this.showProducts(keyword ? productSearch : currentProducts)}</ProductList>
         </div>
         <Pagination
               pageSize={pageSize}
@@ -96,6 +98,8 @@ class ProductListPage extends Component {
 const mapStateToProps = (state) => {
   return {
     products: state.products,
+    keyword: state.search.keyword,
+    productSearch: state.search.product
   };
 };
 

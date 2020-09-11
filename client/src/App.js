@@ -3,12 +3,14 @@ import "./App.css";
 import Menu from "./components/Menu/Menu";
 import routes from "./routes";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
+
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div>
           <Menu />
+          
           <div className="container">
             <div className="row">
               <Switch>{this.showContentMenus(routes)}</Switch>

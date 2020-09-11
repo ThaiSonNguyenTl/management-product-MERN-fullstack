@@ -71,3 +71,18 @@ export const actUpdateProduct = (product) => {
         product
     }
 }
+
+export const actSearchProductRequest = (keyword) => {
+    return dispatch => {
+        callApi(`api/product/search?search=${keyword}`, 'GET', null).then(res => dispatch(actSearchProduct(keyword,res.data)))
+        
+    }
+}
+
+export const actSearchProduct = (keyword,product) => {
+    return {
+        type: Types.SEARCH,
+        keyword,
+        product
+    }
+}

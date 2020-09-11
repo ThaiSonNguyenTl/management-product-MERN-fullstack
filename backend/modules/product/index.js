@@ -19,10 +19,10 @@ const handlers = {
     //   let sortInfor = `${sort == "desc" ? "-" : ""}${sortBy}`;
     //   //fields = 'title,description' => fieldsArr = ['title','description']
     //   let fieldsArr = fields.split(",").map((field) => field.trim());
-    //   let condition = {};
-    //   if (search) {
-    //     condition.title = new RegExp(search, "i"); //i la ko phan biet viet hoa vietthuong
-    //   }
+      // let condition = {};
+      // if (search) {
+      //   condition.title = new RegExp(search, "i"); //i la ko phan biet viet hoa vietthuong
+      // }
 
     //   let items = await productModel
     //     .find(condition, fieldsArr)
@@ -37,6 +37,19 @@ const handlers = {
       res.json(items);
     } catch (err) {
       next(err);
+    }
+  },
+  async searchProduct(req, res, next) {
+    try {
+      let { search = '' } = req.query
+      let condition = {};
+      if (search) {
+        condition.name = new RegExp(search, "i"); //i la ko phan biet viet hoa vietthuong
+      }
+      let items = await productModel.find(condition)
+      res.json(items)
+    } catch(err){
+      next(err)
     }
   },
   async findOne(req, res, next) {
